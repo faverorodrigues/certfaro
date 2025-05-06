@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verificação de Certificado - certfaro</title>
+</head>
+<body>
+  <h2>Verificação de Certificado</h2>
+  <form id="verifyForm">
+    <input type="text" id="hash" placeholder="Digite o código SHA1 do certificado" maxlength="40" required />
+    <button type="submit">Verificar</button>
+  </form>
+  <p id="result"></p>
+
+  <script>
+    document.getElementById('verifyForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const hash = document.getElementById('hash').value;
+      const resultEl = document.getElementById('result');
+      resultEl.textContent = 'Verificando...';
+
+      try {
+        const response = await fetch(`https://script.google.com/macros/s/SEU_DEPLOYMENT_ID/exec?hash=${hash}`);
+        const data = await response.json();
+        resultEl.textContent = data.valid ? '✅ Certificado válido.' : '❌ Certificado não encontrado.';
+      } catch (err) {
+        resultEl.textContent = 'Erro na verificação. Tente novamente.';
+      }
+    });
+  </script>
+</body>
+</html>
