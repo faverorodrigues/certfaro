@@ -29,7 +29,7 @@
       resultEl.textContent = 'Verificando...';
 
       try {
-        const response = await fetch(`https://script.google.com/macros/s/SEU_DEPLOYMENT_ID/exec?hash=${hash}&cpf=${cpf}`);
+        const response = await fetch(`https://script.google.com/macros/s/AKfycbw0CDMKAj7i7eKzwzc6Mbq-Z2bqZU81g_UGBNCVtkMC78UN_bxlpMML6bpEODcfVBmfLw/exec?hash=${hash}&cpf=${cpf}`);
         const data = await response.json();
         resultEl.textContent = data.valid ? '✅ Certificado válido.' : '❌ Dados não conferem. Certificado inválido.';
       } catch (err) {
